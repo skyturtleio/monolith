@@ -9,7 +9,7 @@ defmodule Monolith.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
     ]
   end
 
@@ -19,7 +19,7 @@ defmodule Monolith.MixProject do
   def application do
     [
       mod: {Monolith.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools],
     ]
   end
 
@@ -57,7 +57,8 @@ defmodule Monolith.MixProject do
       {:gettext, "~> 0.26"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
-      {:bandit, "~> 1.5"}
+      {:bandit, "~> 1.5"},
+      {:freedom_formatter, ">= 2.0.0", only: :dev},
     ]
   end
 
@@ -78,8 +79,8 @@ defmodule Monolith.MixProject do
       "assets.deploy": [
         "tailwind monolith --minify",
         "esbuild monolith --minify",
-        "phx.digest"
-      ]
+        "phx.digest",
+      ],
     ]
   end
 end

@@ -8,7 +8,7 @@ defmodule MonolithWeb.Endpoint do
     store: :cookie,
     key: "_monolith_key",
     signing_salt: "eCLh4wrA",
-    same_site: "Lax"
+    same_site: "Lax",
   ]
 
   socket "/live", Phoenix.LiveView.Socket,

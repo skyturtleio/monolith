@@ -17,7 +17,7 @@ config :monolith, MonolithWeb.Endpoint,
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
     formats: [html: MonolithWeb.ErrorHTML, json: MonolithWeb.ErrorJSON],
-    layout: false
+    layout: false,
   ],
   pubsub_server: Monolith.PubSub,
   live_view: [signing_salt: "dhRvQ3Gu"]
@@ -38,7 +38,7 @@ config :esbuild,
     args:
       ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
     cd: Path.expand("../assets", __DIR__),
-    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
+    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)},
   ]
 
 # Configure tailwind (the version is required)
@@ -50,7 +50,7 @@ config :tailwind,
       --input=css/app.css
       --output=../priv/static/assets/app.css
     ),
-    cd: Path.expand("../assets", __DIR__)
+    cd: Path.expand("../assets", __DIR__),
   ]
 
 # Configures Elixir's Logger

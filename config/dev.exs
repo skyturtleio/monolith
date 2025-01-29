@@ -26,7 +26,7 @@ config :monolith, MonolithWeb.Endpoint,
   secret_key_base: "6bFaL08go3gg1TxOGbweVK7ZiiXWMzE6w27jXAZjppY9Dj5Jpy768z5olzXtPDtl",
   watchers: [
     esbuild: {Esbuild, :install_and_run, [:monolith, ~w(--sourcemap=inline --watch)]},
-    tailwind: {Tailwind, :install_and_run, [:monolith, ~w(--watch)]}
+    tailwind: {Tailwind, :install_and_run, [:monolith, ~w(--watch)]},
   ]
 
 # ## SSL Support
@@ -58,8 +58,8 @@ config :monolith, MonolithWeb.Endpoint,
     patterns: [
       ~r"priv/static/(?!uploads/).*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/monolith_web/(controllers|live|components)/.*(ex|heex)$"
-    ]
+      ~r"lib/monolith_web/(controllers|live|components)/.*(ex|heex)$",
+    ],
   ]
 
 # Enable dev routes for dashboard and mailbox

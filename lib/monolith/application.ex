@@ -17,7 +17,7 @@ defmodule Monolith.Application do
       # Start a worker by calling: Monolith.Worker.start_link(arg)
       # {Monolith.Worker, arg},
       # Start to serve requests, typically the last entry
-      MonolithWeb.Endpoint
+      MonolithWeb.Endpoint,
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
