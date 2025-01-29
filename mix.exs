@@ -59,6 +59,7 @@ defmodule Monolith.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
       {:freedom_formatter, ">= 2.0.0", only: :dev},
+      {:inertia, "~> 2.1.0"},
     ]
   end
 

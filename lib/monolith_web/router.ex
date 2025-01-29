@@ -8,6 +8,8 @@ defmodule MonolithWeb.Router do
     plug :put_root_layout, html: {MonolithWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    # A plug for detecting Inertia.js requests and preparing the connection accordingly
+    plug Inertia.Plug
   end
 
   pipeline :api do

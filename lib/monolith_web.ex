@@ -1,3 +1,14 @@
+===> Analyzing applications...
+===> Compiling poolboy
+==> ssl_verify_fun
+Compiling 7 files (.erl)
+Generated ssl_verify_fun app
+==> nodejs
+Compiling 4 files (.ex)
+Generated nodejs app
+==> inertia
+Compiling 9 files (.ex)
+Generated inertia app
 defmodule MonolithWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
@@ -44,6 +55,8 @@ defmodule MonolithWeb do
 
       use Gettext, backend: MonolithWeb.Gettext
 
+      # Add controller helpers from Inertia
+      import Inertia.Controller
       import Plug.Conn
 
       unquote(verified_routes())
@@ -74,6 +87,9 @@ defmodule MonolithWeb do
       # Import convenience functions from controllers
       import Phoenix.Controller,
         only: [get_csrf_token: 0, view_module: 1, view_template: 1]
+
+      # Add HTML helpers from Inertia
+      import Inertia.HTML
 
       # Include general helpers for rendering HTML
       unquote(html_helpers())
