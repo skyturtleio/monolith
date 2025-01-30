@@ -20,6 +20,7 @@ defmodule MonolithWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    get "/inertia", ReactPageController, :index
   end
 
   # Other scopes may use custom stacks.
