@@ -62,7 +62,12 @@ module.exports = {
 This repo has an example route at `/inertia`. This page renders a React component, `MessagePage`, that is passed the props `message` and `name`. Things to note:
 
 - We created a specific controller here (`ReactPageController`), but you don't necessarily need to do that. You can render an Inertia response from an controller since we added the `Inertia.Controller` helpers into `MonolithWeb`.
-- As your frontend gets more complicated (e.g. more pages, components), you may want to break out more directories and use a `Layout` component. The Inertia doc example show using a `Layout` component, which is why they don't `import React` in their example component.
+- As your frontend gets more complicated (e.g. more pages, components), you may want to break out more directories and use a `Layout` component. The Inertia doc example show using a `Layout` component.
+- You will need to `import React` into every `jsx` component. This is because of esbuild. You can [auto-import React](https://esbuild.github.io/content-types/#auto-import-for-jsx) by adding the `--jsx=automatic` flag to the esbuild config in `confix.exs`. From the docs:
+
+> Keep in mind that this also completely changes how the JSX transform works, so it may break your code if you are using a JSX library that's not React. 
+
+
 
 ### Steps
 
