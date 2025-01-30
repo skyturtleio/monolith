@@ -1,14 +1,3 @@
-===> Analyzing applications...
-===> Compiling poolboy
-==> ssl_verify_fun
-Compiling 7 files (.erl)
-Generated ssl_verify_fun app
-==> nodejs
-Compiling 4 files (.ex)
-Generated nodejs app
-==> inertia
-Compiling 9 files (.ex)
-Generated inertia app
 defmodule MonolithWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
