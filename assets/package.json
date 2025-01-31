@@ -2,6 +2,7 @@
   "dependencies": {
     "@inertiajs/react": "^2.0.3",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "topbar": "^3.0.0"
   }
 }
