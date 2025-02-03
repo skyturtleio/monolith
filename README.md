@@ -111,3 +111,22 @@ export default function MessagePage({ message, name }) {
     |> render_inertia("MessagePage")
   end
 ```
+
+## Server-side Rendering
+
+Lesson learned: initially I tried using `--jsx=automatic` for the esbuild config so that I wouldn't have to import React into every file.
+
+```elixir
+~w(js/app.jsx --bundle --chunk-names=chunks/[name]-[hash] --splitting --format=esm --target=es2020 --jsx=automatic --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
+```
+
+However, when I started setting up SSR, I was getting an error that React was not defined:
+
+```shell
+[error] ** (Inertia.SSR.RenderError) React is not defined
+ReferenceError: React is not defined
+    at setup (/Users/leo/projects/monolith/priv/ssr.js:42041:54)
+    at /Users/leo/projects/monolith/priv/ssr.js:19759:22
+```
+
+

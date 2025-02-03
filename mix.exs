@@ -76,10 +76,11 @@ defmodule Monolith.MixProject do
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
-      "assets.build": ["tailwind monolith", "esbuild monolith"],
+      "assets.build": ["tailwind monolith", "esbuild monolith", "esbuild ssr"],
       "assets.deploy": [
         "tailwind monolith --minify",
         "esbuild monolith --minify",
+        "esbuild ssr",
         "phx.digest",
       ],
     ]

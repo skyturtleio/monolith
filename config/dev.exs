@@ -26,6 +26,8 @@ config :monolith, MonolithWeb.Endpoint,
   secret_key_base: "6bFaL08go3gg1TxOGbweVK7ZiiXWMzE6w27jXAZjppY9Dj5Jpy768z5olzXtPDtl",
   watchers: [
     esbuild: {Esbuild, :install_and_run, [:monolith, ~w(--sourcemap=inline --watch)]},
+    # add `ssr` to build watchers for dev environment
+    ssr: {Esbuild, :install_and_run, [:ssr, ~w(--sourcemap=inline --watch)]},
     tailwind: {Tailwind, :install_and_run, [:monolith, ~w(--watch)]},
   ]
 

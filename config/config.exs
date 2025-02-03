@@ -39,6 +39,12 @@ config :esbuild,
       ~w(js/app.jsx --bundle --chunk-names=chunks/[name]-[hash] --splitting --format=esm --target=es2020 --jsx=automatic --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
     cd: Path.expand("../assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)},
+  ],
+  # configure esbuild to compiles `ssr.jsx` for server-side rendering
+  ssr: [
+    args: ~w(js/ssr.jsx --bundle --platform=node --outdir=../priv --format=cjs),
+    cd: Path.expand("../assets", __DIR__),
+    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)},
   ]
 
 # Configure tailwind (the version is required)
@@ -81,7 +87,7 @@ config :inertia,
 
   # Enable server-side rendering for page responses (requires some additional setup,
   # see instructions below). Defaults to `false`.
-  ssr: false,
+  ssr: true,
 
   # Whether to raise an exception when server-side rendering fails (only applies
   # when SSR is enabled). Defaults to `true`.

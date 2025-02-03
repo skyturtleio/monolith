@@ -16,6 +16,11 @@ defmodule Monolith.Application do
       {Finch, name: Monolith.Finch},
       # Start a worker by calling: Monolith.Worker.start_link(arg)
       # {Monolith.Worker, arg},
+
+      # Start the SSR process pool
+      # You must specify a `path` option to locate the directory where the `ssr.js` file lives.
+      {Inertia.SSR, path: Path.join([Application.app_dir(:monolith), "priv"])},
+
       # Start to serve requests, typically the last entry
       MonolithWeb.Endpoint,
     ]
