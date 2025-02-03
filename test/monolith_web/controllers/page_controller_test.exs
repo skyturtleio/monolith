@@ -1,8 +1,11 @@
 defmodule MonolithWeb.PageControllerTest do
   use MonolithWeb.ConnCase
 
-  test "GET /", %{conn: conn} do
-    conn = get(conn, ~p"/")
-    assert html_response(conn, 200) =~ "Peace of mind from prototype to production"
+  describe "GET /" do
+    test "renders the Welcome page React Component", %{conn: conn} do
+      conn = get(conn, "/")
+      assert inertia_component(conn) == "WelcomePage"
+      assert %{name: "Turtle"} = inertia_props(conn)
+    end
   end
 end

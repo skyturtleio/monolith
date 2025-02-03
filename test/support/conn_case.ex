@@ -24,6 +24,9 @@ defmodule MonolithWeb.ConnCase do
 
       use MonolithWeb, :verified_routes
 
+      # Import helpers for Inertia testing
+      import Inertia.Testing
+
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
