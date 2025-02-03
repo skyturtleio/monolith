@@ -5,8 +5,8 @@ export default function Layout({ children }) {
   return (
     <>
       <header class="mb-6 space-x-2 underline">
-        <Link href="/">Home</Link>
-        <Link href="/about">About</Link>
+        <Link href="/" prefetch>Home</Link>
+        <Link href="/counter" prefetch>Counter</Link>
         <a href="/default">Default</a>
       </header>
       <div>

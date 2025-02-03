@@ -21,6 +21,7 @@ defmodule MonolithWeb.Router do
 
     get "/", ReactPageController, :welcome
     get "/about", ReactPageController, :about
+    get "/counter", ReactPageController, :counter
     get "/default", PageController, :home
   end
 

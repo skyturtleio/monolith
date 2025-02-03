@@ -8,6 +8,11 @@ defmodule MonolithWeb.ReactPageController do
     |> render_inertia("WelcomePage")
   end
 
+  def counter(conn, _params) do
+    conn
+    |> render_inertia("Counter")
+  end
+
   def about(conn, _params) do
     conn
     |> render_inertia("AboutPage")
