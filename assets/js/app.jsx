@@ -52,18 +52,20 @@ import topbar from "topbar"
  */
 import React from "react";
 import axios from "axios";
-
 import { createInertiaApp } from "@inertiajs/react";
-import { createRoot } from "react-dom/client";
+import { hydrateRoot } from "react-dom/client";
+import Layout from "./layouts/Layout";
 
 axios.defaults.xsrfHeaderName = "x-csrf-token";
 
 createInertiaApp({
   resolve: async (name) => {
-    return await import(`./pages/${name}.jsx`);
+    const page = await import(`./pages/${name}.jsx`);
+    page.default.layout = page.default.layout || (page => <Layout children={page} />)
+    return page;
   },
   setup({ App, el, props }) {
-    createRoot(el).render(<App {...props} />);
+    hydrateRoot(el).render(<App {...props} />);
   },
 });
 
