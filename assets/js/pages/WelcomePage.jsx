@@ -1,7 +1,7 @@
 import { Head } from '@inertiajs/react'
 import Layout from "../layouts/Layout";
 
-export default function MessagePage({ message, name }) {
+export default function WelcomePage({ message, name }) {
   return (
     <Layout>
       <Head title="Welcome" />

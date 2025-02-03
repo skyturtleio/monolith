@@ -19,9 +19,9 @@ defmodule MonolithWeb.Router do
   scope "/", MonolithWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    get "/", ReactPageController, :welcome
     get "/about", ReactPageController, :about
-    get "/message", ReactPageController, :message
+    get "/default", PageController, :home
   end
 
   # Other scopes may use custom stacks.

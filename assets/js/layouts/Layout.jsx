@@ -4,9 +4,9 @@ export default function Layout({ children }) {
   return (
     <>
       <header class="mb-6 space-x-2 underline">
-        <a href="/">Home</a>
+        <Link href="/">Home</Link>
         <Link href="/about">About</Link>
-        <Link href="/message">Message</Link>
+        <a href="/default">Default</a>
       </header>
       <div>
         {children}
