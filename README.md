@@ -129,4 +129,10 @@ ReferenceError: React is not defined
     at /Users/leo/projects/monolith/priv/ssr.js:19759:22
 ```
 
+# Deployment
 
+- create Dockerfile using mix release
+- add Node.js to RUNNER image so that SSR works
+- in Coolify, create a new Project and select Docker file
+- change Ports Exposes to 4000
+- set environment variables DATABASE_URL, PHX_HOST, SECRET_KEY_BASE, POSTMARK_API_KEY (for when you set up email)
