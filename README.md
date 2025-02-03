@@ -132,7 +132,9 @@ ReferenceError: React is not defined
 # Deployment
 
 - create Dockerfile using mix release
-- add Node.js to RUNNER image so that SSR works
+- need to add Node.js to BUILDER **and** RUNNER image so that SSR works
+
+Need it in the build stage since we installed third-party NPM packages
 - in Coolify, create a new Project and select Docker file
 - change Ports Exposes to 4000
 - set environment variables DATABASE_URL, PHX_HOST, SECRET_KEY_BASE, POSTMARK_API_KEY (for when you set up email)
