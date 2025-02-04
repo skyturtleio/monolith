@@ -28,27 +28,21 @@ I like trailing commas so I installed Freedom Formatter
 
 - Add [Freedom Formatter](https://github.com/marcandre/freedom_formatter) for trailing commas.
 
-### Server-side setup
+### Server-side Setup
 
-Setting up the Inertia.js Phoenix Adapter
+- Add the `:inertia` package to your deps in `mix.exs` and run `mix deps.get`
 
-- [Installation instructions](https://hexdocs.pm/inertia/readme.html#installation)
+```elixir
+# mix.exs
+{:inertia, "~> 2.2.0"}
+```
 
-#### Steps
-
-- Add `:inertia` to your dependencies. Don't forget to run `mix deps.get` afterwards
-- Add Inertia's server-side configuration to `config.exs`
-
-When adding the `config :inertia`, remember that the `endpoint:` is your application's web namespace e.g. `MonolithWeb` not `Monolith`.
-
-- Add Inertia helpers for Controller and HTML to `MonolithWeb`
+- Add Inertia configuration to `confix.exs`
+- Add Inertia helpers for Controller and HTML to `SvelixWeb`
 - Add `Inertia.Plug` to your browser pipeline in your `router.ex`
 - Update `<head>` component in the root layout so the client-side library will keep the title in sync
 
-
 ### Client-side setup
-
-#### Steps
 
 - Install the Inertia.js library for your frontend library as well as the frontend library itself. In this case, we will be using React. Remember, everything "frontend" related will be done in the `assets` directory.
 - Initialize the client-side library in `app.jsx`. We renamed `app.js` to `app.jsx` since we are using React.
@@ -61,18 +55,25 @@ When adding the `config :inertia`, remember that the `endpoint:` is your applica
 ~w(js/app.jsx --bundle --chunk-names=chunks/[name]-[hash] --splitting --format=esm --target=es2020 --outdir=../priv/static/assets --external fonts/* --external:/images/*),
 ```
 
-- Tailwind v4.0 no longer requires a configuration file, but they still allow it for backwards compatibility. If you are using Tailwind < v4.0, update the `tailwind.config.js` content to include `jsx` files:
-
 ```javascript
 // `assets/tailwind.config.js`
 module.exports = {
   content: [
     "./js/**/*.js",
     "./js/**/*.jsx",
+    "./js/**/*.tsx",
     "../lib/monolith_web.ex",
     "../lib/monolith_web/**/*.*ex"
   ],
 ```
+
+#### Optional client-side setup
+
+In case you want TypeScript support
+
+esbuild has a TypeScript loader that is enabled by default for `.ts` and `.tsx` files. It can parse files but will not do anything for type checking. There are some [caveats](https://esbuild.github.io/content-types/#typescript-caveats) so the esbuild docs recommend enabling `isolatedModules` and `esModuleInterop` in your `tsconfig.json`.
+
+Add `*.tsx` files to the Tailwind config file.
 
 ## Render a response using a React component
 
@@ -80,11 +81,25 @@ This repo has an example route at `/inertia`. This page renders a React componen
 
 - We created a specific controller here (`ReactPageController`), but you don't necessarily need to do that. You can render an Inertia response from an controller since we added the `Inertia.Controller` helpers into `MonolithWeb`.
 - As your frontend gets more complicated (e.g. more pages, components), you may want to break out more directories and use a `Layout` component. The Inertia doc example show using a `Layout` component.
-- You will need to `import React` into every `jsx` component. This is because of esbuild. You can [auto-import React](https://esbuild.github.io/content-types/#auto-import-for-jsx) by adding the `--jsx=automatic` flag to the esbuild config in `confix.exs`. From the docs:
-
-> Keep in mind that this also completely changes how the JSX transform works, so it may break your code if you are using a JSX library that's not React. 
+- ~~You will need to `import React` into every `jsx` component. This is because of esbuild. You can [auto-import React](https://esbuild.github.io/content-types/#auto-import-for-jsx) by adding the `--jsx=automatic` flag to the esbuild config in `confix.exs`.~~ (Update: )
 
 
+*Update*: Initially I tried using `--jsx=automatic` for the esbuild config so that I wouldn't have to import React into every file.
+
+```elixir
+~w(js/app.jsx --bundle --chunk-names=chunks/[name]-[hash] --splitting --format=esm --target=es2020 --jsx=automatic --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
+```
+
+However, when I started setting up SSR, I was getting an error that React was not defined:
+
+```shell
+[error] ** (Inertia.SSR.RenderError) React is not defined
+ReferenceError: React is not defined
+    at setup (/Users/leo/projects/monolith/priv/ssr.js:42041:54)
+    at /Users/leo/projects/monolith/priv/ssr.js:19759:22
+```
+
+I removed the `---jsx=automatic` flag because I was having too many issues trying to get SSR to work.
 
 ### Steps
 
@@ -131,21 +146,6 @@ export default function MessagePage({ message, name }) {
 
 ## Server-side Rendering
 
-Lesson learned: initially I tried using `--jsx=automatic` for the esbuild config so that I wouldn't have to import React into every file.
-
-```elixir
-~w(js/app.jsx --bundle --chunk-names=chunks/[name]-[hash] --splitting --format=esm --target=es2020 --jsx=automatic --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
-```
-
-However, when I started setting up SSR, I was getting an error that React was not defined:
-
-```shell
-[error] ** (Inertia.SSR.RenderError) React is not defined
-ReferenceError: React is not defined
-    at setup (/Users/leo/projects/monolith/priv/ssr.js:42041:54)
-    at /Users/leo/projects/monolith/priv/ssr.js:19759:22
-```
-
 # Deployment
 
 - create Dockerfile using mix release
@@ -155,3 +155,8 @@ Need it in the build stage since we installed third-party NPM packages
 - in Coolify, create a new Project and select Docker file
 - change Ports Exposes to 4000
 - set environment variables DATABASE_URL, PHX_HOST, SECRET_KEY_BASE, POSTMARK_API_KEY (for when you set up email)
+
+## Lessons Learned
+
+- dont forget to add new file extensions to Tailwind config
+- add `npm install` to mix aliases even though youre usign esbuild
