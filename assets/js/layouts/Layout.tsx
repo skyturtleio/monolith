@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "@inertiajs/react";
 
-import { ReactNode } from 'react'
+import { type ReactNode } from 'react'
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
