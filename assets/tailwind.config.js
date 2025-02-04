@@ -9,6 +9,7 @@ module.exports = {
   content: [
     "./js/**/*.js",
     "./js/**/*.jsx",
+    "./js/**/*.tsx",
     "../lib/monolith_web.ex",
     "../lib/monolith_web/**/*.*ex"
   ],
