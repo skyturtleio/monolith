@@ -7,7 +7,7 @@ export function render(page) {
     page,
     render: renderToString,
     resolve: async (name) => {
-      return await import(`./pages/${name}.jsx`);
+      return await import(`./pages/${name}.tsx`);
     },
     setup: ({ App, props }) => <App {...props} />,
   });
