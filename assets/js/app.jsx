@@ -65,7 +65,7 @@ createInertiaApp({
     return page;
   },
   setup({ App, el, props }) {
-    hydrateRoot(el).render(<App {...props} />);
+    hydrateRoot(el, <App {...props} />);
   },
 });
 
