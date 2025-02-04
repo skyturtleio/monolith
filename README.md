@@ -1,15 +1,32 @@
 # Monolith
 
-A starter template for a modern monolith using Phoenix, Inertia.js, and React
+An example project for a modern monolith using Phoenix, Inertia.js, React. 
+You can find the application running at https://monolith.skyturtle.io/
 
-## Setup
+It is deployed to a self-hosted VPS using [Coolify](https://www.coolify.io/). A healthcheck has been enabled using a custom plug module, `MonolithWeb.Healthcheck`.
 
-You need to configure the server-side and client-side portions of Inertia.
+On the home page you will see a basic navbar with three links: `Home`, `Counter`, and `Default`. `Home` and `Counter` are React components and can be found within the `assets` directory. The `Home` page receives props from a standard Phoenix controller. The navigation for the links between these pages uses Inertia with `prefetch` enabled. `Default` is the default home page that ships with `mix phx.new my_app`.
+
+## Development
+
+This project is built with Phoenix 1.7.19, Inertia v2, and React 19. Third-party packages are installed using `npm` so you will need to have Node.js installed.
+
+To start your Phoenix server:
+
+  * Run `mix setup` to install and setup dependencies
+  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+
+Now you can visit [`localhost:4000`](http://localhost:4000) from your browser. The home page is a React component being rendered by Inertia.
+
+## Inertia.js Setup
+
+The official setup instructions can be found on HexDocs for the [Inertia.js Phoenix Adapter](https://hexdocs.pm/inertia/readme.html#installation). These setup instructions give a high-level overview of the steps. The details below are to help out my future self and also clariy some questions I had as I was going through the instructions.
 
 ### Optional - Freedom Formatter
 
-Add [Freedom Formatter](https://github.com/marcandre/freedom_formatter) for trailing commas.
+I like trailing commas so I installed Freedom Formatter
 
+- Add [Freedom Formatter](https://github.com/marcandre/freedom_formatter) for trailing commas.
 
 ### Server-side setup
 
