@@ -1,7 +1,12 @@
 import React from 'react';
 import { Head } from '@inertiajs/react'
 
-export default function WelcomePage({ message, name }) {
+interface WelcomeProps {
+  message: string;
+  name: string;
+}
+
+export default function WelcomePage({ message, name }: WelcomeProps) {
   return (
     <>
       <Head title="Welcome" />
